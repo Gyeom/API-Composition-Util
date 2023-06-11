@@ -1,3 +1,8 @@
+package dto_example.composition_interface;
+
+import dto_example.model.Order;
+import util.APICompositionUtil;
+
 public class OrderGetter implements APICompositionUtil.Getter<Order> {
 
     @Override

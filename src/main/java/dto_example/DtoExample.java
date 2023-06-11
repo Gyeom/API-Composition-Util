@@ -1,3 +1,14 @@
+package dto_example;
+
+import dto_example.composition_interface.OrderGetter;
+import dto_example.composition_interface.UserOrderGetter;
+import dto_example.composition_interface.UserOrderSetter;
+import dto_example.model.Order;
+import dto_example.model.UserOrder;
+import util.APICompositionUtil;
+import util.JoinedData;
+import util.QueryData;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;

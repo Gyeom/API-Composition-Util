@@ -1,6 +1,11 @@
+package dto_example.model;
+
+import lombok.Getter;
+
+@Getter
 public class UserOrder {
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private String productName;
     private Integer orderId;
 
@@ -9,33 +14,17 @@ public class UserOrder {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(final String productName) {
+    public void changeProductName(final String productName) {
         this.productName = productName;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(final Integer orderId) {
+    public void changeOrderId(final Integer orderId) {
         this.orderId = orderId;
     }
 
     @Override
     public String toString() {
-        return "UserOrder{" +
+        return "dto_example.model.UserOrder{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", productName='" + productName + '\'' +

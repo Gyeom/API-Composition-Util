@@ -1,3 +1,9 @@
+package map_example;
+
+import util.APICompositionUtil;
+import util.JoinedData;
+import util.QueryData;
+
 import java.util.*;
 
 public class MapExample {
