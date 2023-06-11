@@ -1,10 +1,11 @@
-# MergeUtils - Joining Solution for Microservices Architecture 
+# MergeUtils - API Composition Solution for Microservices Architecture
 
-Welcome to MergeUtils, Java utility for solving a common issue encountered in a Microservices Architecture (MSA): the need to join data from disparate services at the application level. Due to the inherent separation of databases in MSA, it is often necessary to perform joins in the application layer itself. This is where MergeUtils comes in handy.
+Welcome to MergeUtils, a potent Java utility designed to handle one of the significant challenges faced in Microservices Architecture (MSA): amalgamating data from disparate services at the application level. Due to the isolated nature of databases in MSA, the need for performing joins at the application level becomes imperative. MergeUtils makes this task easier and more efficient.
 
 ## Overview
+MergeUtils provides a sophisticated and accessible mechanism to execute left joins across data sourced from various services, implementing an API Composition pattern. This design is focused on customization, allowing users to modify the joining process according to their specific requirements. MergeUtils achieves this flexibility through interfaces that users can implement according to their application needs.
 
-MergeUtils provides a streamlined, easy-to-use mechanism for executing left joins across data from different services. It is implemented with a keen focus on customization, allowing users to tailor the joining process to their specific requirements. The solution accomplishes this through interfaces that the users can implement with their own logic.
+Microservices Architecture, where each service has its isolated database, there's often a need for a client that requires data that spans multiple services. [The API Composition pattern](https://microservices.io/patterns/data/api-composition.html) is a way to address this problem. MergeUtils takes the principles of this pattern and provides a streamlined, easy-to-use Java utility that facilitates the process.
 
 ## Features
 
