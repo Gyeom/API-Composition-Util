@@ -20,8 +20,8 @@ public class DtoExample {
 
     private static void dtoExample() {
         // Retrieve the users and their orders
-        List<UserOrder> userOrder = findAllUsersMapDto();
-        List<Order> orders = findAllOrdersMapDto();
+        List<UserOrder> userOrder = findAllUsersDto();
+        List<Order> orders = findAllOrdersDto();
 
         // Define the query data (users) and the data to be joined (orders)
         QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new UserOrderGetter(), new UserOrderSetter(), data -> new UserOrder(data.getId(), data.getName()));
@@ -39,7 +39,7 @@ public class DtoExample {
         }
     }
 
-    private static List<Order> findAllOrdersMapDto() {
+    private static List<Order> findAllOrdersDto() {
         return Arrays.asList(
                 new Order(1, 1, "Apple"),
                 new Order(2, 2, "Banana"),
@@ -48,7 +48,7 @@ public class DtoExample {
         );
     }
 
-    private static List<UserOrder> findAllUsersMapDto() {
+    private static List<UserOrder> findAllUsersDto() {
         return Arrays.asList(
                 new UserOrder(1, "John"),
                 new UserOrder(2, "Jane"),

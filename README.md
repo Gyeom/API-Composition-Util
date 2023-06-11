@@ -60,8 +60,8 @@ In the second example, we perform the same operation but this time using DTOs. T
 
 ```java
 // Retrieve the users and their orders
-List<UserOrder> userOrder = findAllUsersMapDto();
-List<Order> orders = findAllOrdersMapDto();
+List<UserOrder> userOrder = findAllUsersDto();
+List<Order> orders = findAllOrdersDto();
 
 // Define the query data (users) and the data to be joined (orders)
 QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new UserOrderGetter(), new UserOrderSetter(), data -> new UserOrder(data.getId(), data.getName()));
