@@ -1,7 +1,10 @@
+import lombok.experimental.UtilityClass;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MergeUtils {
+@UtilityClass
+public class APICompositionUtil {
 
     public interface Getter<T> {
         Object getValue(T data, String key);
@@ -19,7 +22,7 @@ public class MergeUtils {
         T create(T data);
     }
 
-    public static <T, U> List<T> leftJoin(QueryData<T> queryData, JoinedData<U> joinedData, MergeUtils.JoinKeyGetter mergeKeys) {
+    public <T, U> List<T> leftJoin(QueryData<T> queryData, JoinedData<U> joinedData, APICompositionUtil.JoinKeyGetter mergeKeys) {
 
         List<T> queryDataValues = queryData.getValues();
         Setter<T> queryDataSetter = queryData.getDataSetter();
@@ -54,7 +57,7 @@ public class MergeUtils {
         return mergedItems;
     }
 
-    private static <T> MultiKey createQueryMultiKey(final Getter<T> queryDataGetter, final List<String> queryKeys, final T queryDataValue) {
+    private <T> MultiKey createQueryMultiKey(final Getter<T> queryDataGetter, final List<String> queryKeys, final T queryDataValue) {
         return new MultiKey(
                 queryKeys.stream()
                         .filter(key -> queryDataGetter.getValue(queryDataValue, key) != null)
@@ -63,7 +66,7 @@ public class MergeUtils {
         );
     }
 
-    private static <U> Map<MultiKey, List<U>> createJoinedDataMap(final List<U> joinedDataValues, final Getter<U> joinedDataGetter, final List<String> joinedKeys) {
+    private <U> Map<MultiKey, List<U>> createJoinedDataMap(final List<U> joinedDataValues, final Getter<U> joinedDataGetter, final List<String> joinedKeys) {
         return joinedDataValues.stream().collect(
                 Collectors.groupingBy(item -> new MultiKey(
                                 joinedKeys.stream()
@@ -74,7 +77,7 @@ public class MergeUtils {
         );
     }
 
-    private static <T, U> void mergeFields(T queryData, U joinedData, JoinKeyGetter mergeKeys, Setter<T> queryDataSetter, Getter<U> joinedDataGetter) {
+    private <T, U> void mergeFields(T queryData, U joinedData, JoinKeyGetter mergeKeys, Setter<T> queryDataSetter, Getter<U> joinedDataGetter) {
         for (String key : mergeKeys.getKeys()) {
             Object value = joinedDataGetter.getValue(joinedData, key);
             if (value != null) {
@@ -83,7 +86,7 @@ public class MergeUtils {
         }
     }
 
-    private static <T> T createMergedData(ObjectCreator<T> objectCreator, T queryData) {
+    private <T> T createMergedData(ObjectCreator<T> objectCreator, T queryData) {
         return objectCreator.create(queryData);
     }
 }

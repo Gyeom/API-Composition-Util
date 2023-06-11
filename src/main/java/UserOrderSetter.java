@@ -1,4 +1,4 @@
-public class UserOrderSetter implements MergeUtils.Setter<UserOrder> {
+public class UserOrderSetter implements APICompositionUtil.Setter<UserOrder> {
     @Override
     public void setValue(UserOrder data, String key, Object value) {
         if (key.equals("orderId")) {

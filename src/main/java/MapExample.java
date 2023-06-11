@@ -15,14 +15,14 @@ public class MapExample {
         JoinedData<Map<String, Object>> joinedData = new JoinedData<>(orders, List.of("userId"), Map::get);
 
         // Perform the left join
-        List<Map<String, Object>> mergedMapList = MergeUtils.leftJoin(
+        List<Map<String, Object>> userOrders = APICompositionUtil.leftJoin(
                 queryData,
                 joinedData,
                 () -> Set.of("productName", "orderId")
         );
 
         // Print the joined data
-        for (Map<String, Object> map : mergedMapList) {
+        for (Map<String, Object> map : userOrders) {
             System.out.println(map);
         }
     }

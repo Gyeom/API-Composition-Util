@@ -8,7 +8,7 @@ import java.util.List;
 public class QueryData<T> {
     private final List<T> values;
     private final List<String> keys;
-    private final MergeUtils.Getter<T> dataGetter;
-    private final MergeUtils.Setter<T> dataSetter;
-    private final MergeUtils.ObjectCreator<T> objectCreator;
+    private final APICompositionUtil.Getter<T> dataGetter;
+    private final APICompositionUtil.Setter<T> dataSetter;
+    private final APICompositionUtil.ObjectCreator<T> objectCreator;
 }

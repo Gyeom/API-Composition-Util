@@ -8,5 +8,5 @@ import java.util.List;
 public class JoinedData<U> {
     private final List<U> values;
     private final List<String> keys;
-    private final MergeUtils.Getter<U> dataGetter;
+    private final APICompositionUtil.Getter<U> dataGetter;
 }

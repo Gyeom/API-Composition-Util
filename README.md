@@ -1,11 +1,11 @@
-# MergeUtils - API Composition Solution for Microservices Architecture
+# API Composition Util - API Composition Solution for Microservices Architecture
 
-Welcome to MergeUtils, a potent Java utility designed to handle one of the significant challenges faced in Microservices Architecture (MSA): amalgamating data from disparate services at the application level. Due to the isolated nature of databases in MSA, the need for performing joins at the application level becomes imperative. MergeUtils makes this task easier and more efficient.
+Welcome to API Composition Util, a potent Java utility designed to handle one of the significant challenges faced in Microservices Architecture (MSA): amalgamating data from disparate services at the application level. Due to the isolated nature of databases in MSA, the need for performing joins at the application level becomes imperative. API Composition Util makes this task easier and more efficient.
 
 ## Overview
-MergeUtils provides a sophisticated and accessible mechanism to execute left joins across data sourced from various services, implementing an API Composition pattern. This design is focused on customization, allowing users to modify the joining process according to their specific requirements. MergeUtils achieves this flexibility through interfaces that users can implement according to their application needs.
+API Composition Util provides a sophisticated and accessible mechanism to execute left joins across data sourced from various services, implementing an API Composition pattern. This design is focused on customization, allowing users to modify the joining process according to their specific requirements. API Composition Util achieves this flexibility through interfaces that users can implement according to their application needs.
 
-Microservices Architecture, where each service has its isolated database, there's often a need for a client that requires data that spans multiple services. [The API Composition pattern](https://microservices.io/patterns/data/api-composition.html) is a way to address this problem. MergeUtils takes the principles of this pattern and provides a streamlined, easy-to-use Java utility that facilitates the process.
+Microservices Architecture, where each service has its isolated database, there's often a need for a client that requires data that spans multiple services. [The API Composition pattern](https://microservices.io/patterns/data/api-composition.html) is a way to address this problem. API Composition Util takes the principles of this pattern and provides a streamlined, easy-to-use Java utility that facilitates the process.
 
 ## Features
 
@@ -17,9 +17,9 @@ Microservices Architecture, where each service has its isolated database, there'
   
 - **ObjectCreator Interface:** Allows the creation of new objects based on a given template object.
   
-- **leftJoin Method:** This is the core functionality of MergeUtils. It facilitates the left join operation across different services. The method utilizes the Getter, Setter, JoinKeyGetter, and ObjectCreator interfaces to perform this task in a highly customizable manner.
+- **leftJoin Method:** This is the core functionality of API Composition Util. It facilitates the left join operation across different services. The method utilizes the Getter, Setter, JoinKeyGetter, and ObjectCreator interfaces to perform this task in a highly customizable manner.
   
-- **MultiKey Class:** This helper class allows MergeUtils to deal with multiple keys when performing the join. MultiKey uses the equals and hashCode methods to allow an efficient grouping of data based on multiple key fields.
+- **MultiKey Class:** This helper class allows API Composition Util to deal with multiple keys when performing the join. MultiKey uses the equals and hashCode methods to allow an efficient grouping of data based on multiple key fields.
 
 ## Usage
 
@@ -27,11 +27,11 @@ Microservices Architecture, where each service has its isolated database, there'
 2. Collect your data from the different services.
 3. Call the `leftJoin` method, passing in the interfaces and the data you collected.
 
-MergeUtils will return a List of your templated data type containing the joined data. With MergeUtils, you can focus on what you do best: creating exceptional software solutions, while we take care of the rest.
+API Composition Util will return a List of your templated data type containing the joined data. With API Composition Util, you can focus on what you do best: creating exceptional software solutions, while we take care of the rest.
 
 ## Sample Example using `Map<String, Object>`
 
-In the first example, we demonstrate how to use MergeUtils to perform left joins on two `Map<String, Object>` lists representing users and their orders. This comes handy when dealing with separate microservices that manage user data and order data, respectively.
+In the first example, we demonstrate how to use API Composition Util to perform left joins on two `Map<String, Object>` lists representing users and their orders. This comes handy when dealing with separate microservices that manage user data and order data, respectively.
 
 ```java
 // Retrieve the users and their orders
@@ -43,21 +43,21 @@ QueryData<Map<String, Object>> queryData = new QueryData<>(users, List.of("id"),
 JoinedData<Map<String, Object>> joinedData = new JoinedData<>(orders, List.of("userId"), Map::get);
 
 // Perform the left join
-List<Map<String, Object>> mergedMapList = MergeUtils.leftJoin(
+List<Map<String, Object>> userOrders = ApiCompositionUtil.leftJoin(
         queryData,
         joinedData,
         () -> Set.of("productName", "orderId")
 );
 
 // Print the joined data
-for (Map<String, Object> map : mergedMapList) {
+for (Map<String, Object> map : userOrders) {
     System.out.println(map);
 }
 ```
 
 ## Sample Example using DTO
 
-In the second example, we perform the same operation but this time using DTOs. The DtoExample class shows how to use MergeUtils to join data from UserOrder and Order objects.
+In the second example, we perform the same operation but this time using DTOs. The DtoExample class shows how to use Api Composition Util to join data from UserOrder and Order objects.
 
 ```java
 // Retrieve the users and their orders
@@ -69,7 +69,7 @@ QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new U
 JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter());
 
 // Perform the left join
-List<UserOrder> userOrders = MergeUtils.leftJoin(
+List<UserOrder> userOrders = ApiCompositionUtil.leftJoin(
         queryData,
         joinedData,
         () -> Set.of("productName", "orderId")

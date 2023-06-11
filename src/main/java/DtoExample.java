@@ -17,7 +17,7 @@ public class DtoExample {
         JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter());
 
         // Perform the left join
-        List<UserOrder> userOrders = MergeUtils.leftJoin(
+        List<UserOrder> userOrders = APICompositionUtil.leftJoin(
                 queryData,
                 joinedData,
                 () -> Set.of("productName", "orderId")

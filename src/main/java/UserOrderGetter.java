@@ -1,4 +1,4 @@
-public class UserOrderGetter implements MergeUtils.Getter<UserOrder> {
+public class UserOrderGetter implements APICompositionUtil.Getter<UserOrder> {
 
     @Override
     public Object getValue(final UserOrder data, final String key) {
