@@ -40,13 +40,12 @@ List<Map<String, Object>> orders = findAllOrdersMap();
 
 // Define the query data (users) and the data to be joined (orders)
 QueryData<Map<String, Object>> queryData = new QueryData<>(users, List.of("id"), Map::get, Map::put, HashMap::new);
-JoinedData<Map<String, Object>> joinedData = new JoinedData<>(orders, List.of("userId"), Map::get);
+JoinedData<Map<String, Object>> joinedData = new JoinedData<>(orders, List.of("userId"), Map::get, () -> Set.of("productName", "orderId"));
 
 // Perform the left join
-List<Map<String, Object>> userOrders = ApiCompositionUtil.leftJoin(
+List<Map<String, Object>> userOrders = APICompositionUtil.leftJoin(
         queryData,
-        joinedData,
-        () -> Set.of("productName", "orderId")
+        joinedData
 );
 
 // Print the joined data
@@ -66,13 +65,12 @@ List<Order> orders = findAllOrdersMapDto();
 
 // Define the query data (users) and the data to be joined (orders)
 QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new UserOrderGetter(), new UserOrderSetter(), data -> new UserOrder(data.getId(), data.getName()));
-JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter());
+JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter(), () -> Set.of("productName", "orderId"));
 
 // Perform the left join
-List<UserOrder> userOrders = ApiCompositionUtil.leftJoin(
+List<UserOrder> userOrders = APICompositionUtil.leftJoin(
         queryData,
-        joinedData,
-        () -> Set.of("productName", "orderId")
+        joinedData
 );
 
 // Print the joined data

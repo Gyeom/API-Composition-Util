@@ -25,13 +25,12 @@ public class DtoExample {
 
         // Define the query data (users) and the data to be joined (orders)
         QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new UserOrderGetter(), new UserOrderSetter(), data -> new UserOrder(data.getId(), data.getName()));
-        JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter());
+        JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter(), () -> Set.of("productName", "orderId"));
 
         // Perform the left join
         List<UserOrder> userOrders = APICompositionUtil.leftJoin(
                 queryData,
-                joinedData,
-                () -> Set.of("productName", "orderId")
+                joinedData
         );
 
         // Print the joined data

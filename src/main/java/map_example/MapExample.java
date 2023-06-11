@@ -18,13 +18,12 @@ public class MapExample {
 
         // Define the query data (users) and the data to be joined (orders)
         QueryData<Map<String, Object>> queryData = new QueryData<>(users, List.of("id"), Map::get, Map::put, HashMap::new);
-        JoinedData<Map<String, Object>> joinedData = new JoinedData<>(orders, List.of("userId"), Map::get);
+        JoinedData<Map<String, Object>> joinedData = new JoinedData<>(orders, List.of("userId"), Map::get, () -> Set.of("productName", "orderId"));
 
         // Perform the left join
         List<Map<String, Object>> userOrders = APICompositionUtil.leftJoin(
                 queryData,
-                joinedData,
-                () -> Set.of("productName", "orderId")
+                joinedData
         );
 
         // Print the joined data

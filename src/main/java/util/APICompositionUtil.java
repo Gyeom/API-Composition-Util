@@ -24,7 +24,7 @@ public class APICompositionUtil {
         T create(T data);
     }
 
-    public <T, U> List<T> leftJoin(QueryData<T> queryData, JoinedData<U> joinedData, APICompositionUtil.JoinKeyGetter mergeKeys) {
+    public <T, U> List<T> leftJoin(QueryData<T> queryData, JoinedData<U> joinedData) {
 
         List<T> queryDataValues = queryData.getValues();
         Setter<T> queryDataSetter = queryData.getDataSetter();
@@ -35,6 +35,7 @@ public class APICompositionUtil {
         List<U> joinedDataValues = joinedData.getValues();
         Getter<U> joinedDataGetter = joinedData.getDataGetter();
         List<String> joinedKeys = joinedData.getKeys();
+        JoinKeyGetter joinKeyGetter = joinedData.getJoinKeyGetter();
 
         Map<MultiKey, List<U>> joinedDataMap = createJoinedDataMap(joinedDataValues, joinedDataGetter, joinedKeys);
 
@@ -48,7 +49,7 @@ public class APICompositionUtil {
                     joinedItemList -> {
                         for (U joinedItem : joinedItemList) {
                             T mergedData = createMergedData(objectCreator, queryDataValue);
-                            mergeFields(mergedData, joinedItem, mergeKeys, queryDataSetter, joinedDataGetter);
+                            mergeFields(mergedData, joinedItem, joinKeyGetter, queryDataSetter, joinedDataGetter);
                             mergedItems.add(mergedData);
                         }
                     },
@@ -79,8 +80,8 @@ public class APICompositionUtil {
         );
     }
 
-    private <T, U> void mergeFields(T queryData, U joinedData, JoinKeyGetter mergeKeys, Setter<T> queryDataSetter, Getter<U> joinedDataGetter) {
-        for (String key : mergeKeys.getKeys()) {
+    private <T, U> void mergeFields(T queryData, U joinedData, JoinKeyGetter joinKeyGetter, Setter<T> queryDataSetter, Getter<U> joinedDataGetter) {
+        for (String key : joinKeyGetter.getKeys()) {
             Object value = joinedDataGetter.getValue(joinedData, key);
             if (value != null) {
                 queryDataSetter.setValue(queryData, key, value);
