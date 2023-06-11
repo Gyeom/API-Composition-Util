@@ -10,4 +10,5 @@ public class QueryData<T> {
     private final List<String> keys;
     private final MergeUtils.Getter<T> dataGetter;
     private final MergeUtils.Setter<T> dataSetter;
+    private final MergeUtils.ObjectCreator<T> objectCreator;
 }

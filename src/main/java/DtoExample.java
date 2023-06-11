@@ -13,15 +13,14 @@ public class DtoExample {
         List<Order> orders = findAllOrdersMapDto();
 
         // Define the query data (users) and the data to be joined (orders)
-        QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new UserOrderGetter(), new UserOrderSetter());
+        QueryData<UserOrder> queryData = new QueryData<>(userOrder, List.of("id"), new UserOrderGetter(), new UserOrderSetter(), data -> new UserOrder(data.getId(), data.getName()));
         JoinedData<Order> joinedData = new JoinedData<>(orders, List.of("userId"), new OrderGetter());
 
         // Perform the left join
         List<UserOrder> userOrders = MergeUtils.leftJoin(
                 queryData,
                 joinedData,
-                () -> Set.of("productName", "orderId"),
-                data -> new UserOrder(data.getId(), data.getName())
+                () -> Set.of("productName", "orderId")
         );
 
         // Print the joined data
