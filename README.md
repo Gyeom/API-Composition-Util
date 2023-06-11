@@ -27,7 +27,7 @@ Microservices Architecture, where each service has its isolated database, there'
 2. Collect your data from the different services.
 3. Call the `leftJoin` method, passing in the interfaces and the data you collected.
 
-API Composition Util will return a List of your templated data type containing the joined data. With API Composition Util, you can focus on what you do best: creating exceptional software solutions, while we take care of the rest.
+API Composition Util will return a List of your templated data type containing the joined data.
 
 ## Sample Example using `Map<String, Object>`
 
